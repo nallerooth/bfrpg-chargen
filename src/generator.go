@@ -18,9 +18,15 @@ func main() {
 	dice := dice.New()
 
 	character := bf.Character{}
-	character.RollAttributes(dice, method)
-	character.SelectClass()
-	character.SelectRace()
+	for {
+		character.RollAttributes(dice, method)
+		character.SelectRace()
+
+		if err := character.SelectClass(); err == nil {
+			break
+		}
+
+	}
 	character.SetLevel(8)
 	//character.Print()
 	character.Text(os.Stdout)

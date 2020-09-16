@@ -72,7 +72,7 @@ func NewCleric() *Class {
 
 func NewFighter() *Class {
 	c := Class{}
-	c.id = ClassThief
+	c.id = ClassFighter
 	c.name = "Fighter"
 	c.primaryReqAttr = AttrStr
 	c.hitDie = HitDie{8, 2}

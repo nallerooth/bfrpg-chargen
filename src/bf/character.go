@@ -1,6 +1,7 @@
 package bf
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 
@@ -42,8 +43,40 @@ func (c *Character) SetLevel(level uint) {
 }
 
 // SelectClass will set the class best suited to the character's attributes
-func (c *Character) SelectClass() { // TODO: Add desired class?
-	c.class = NewCleric()
+func (c *Character) SelectClass() error {
+	if c.race == nil {
+		return fmt.Errorf("Character must have a race before selecing a class is possible")
+	}
+	classes := AllClasses()
+	availableClasses := make([]*Class, 0, len(classes))
+
+	for _, cl := range classes {
+		valid := true
+		for a := 0; a < len(c.attributes); a++ {
+			val := c.attributes[a].value
+			if val < cl.reqAttributes[a] {
+				valid = false
+				break
+			}
+		}
+
+		if valid {
+			// Class is valid given character attributes, check race
+			if c.race.availableClasses&cl.id != 0 {
+				availableClasses = append(availableClasses, cl)
+			}
+		}
+	}
+
+	if len(availableClasses) == 0 {
+		return fmt.Errorf("Impossible character >> no classes available")
+	} else if len(availableClasses) > 1 {
+		c.class = availableClasses[rand.Intn(len(availableClasses))]
+	} else {
+		c.class = availableClasses[0]
+	}
+
+	return nil
 }
 
 func (c *Character) SelectRace() {
@@ -52,7 +85,7 @@ func (c *Character) SelectRace() {
 
 	for _, r := range races {
 		valid := true
-		for a := 0; a < len(r.minAttributes); a++ {
+		for a := 0; a < len(c.attributes); a++ {
 			val := c.attributes[a].value
 			if val < r.minAttributes[a] || val > r.maxAttributes[a] {
 				valid = false

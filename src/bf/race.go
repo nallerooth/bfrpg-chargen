@@ -3,13 +3,8 @@ package bf
 func AllRaces() []*Race {
 	r := []*Race{
 		&Race{
-			name: "Dwarf",
-			availableClasses: [4]int{
-				1, // ClassCleric
-				1, // ClassFighter
-				0, // ClassMagicUser
-				1, // ClassThief
-			},
+			name:             "Dwarf",
+			availableClasses: ClassCleric | ClassFighter | ClassThief,
 			minAttributes: [6]uint{
 				3, 3, 9, 3, 3, 3, // Con 9
 			},
@@ -19,14 +14,8 @@ func AllRaces() []*Race {
 			maxHitDieBase: 8,
 		},
 		&Race{
-			name: "Elf",
-			availableClasses: [4]int{
-				1, // ClassCleric
-				1, // ClassFighter
-				1, // ClassMagicUser
-				1, // ClassThief
-				// TODO: Add multiclass
-			},
+			name:             "Elf",
+			availableClasses: ClassCleric | ClassFighter | ClassMagicUser | ClassThief, // TODO: add multiclass
 			minAttributes: [6]uint{
 				3, 3, 3, 9, 3, 3, // Int 9
 			},
@@ -36,13 +25,8 @@ func AllRaces() []*Race {
 			maxHitDieBase: 6,
 		},
 		&Race{
-			name: "Halfling",
-			availableClasses: [4]int{
-				1, // ClassCleric
-				1, // ClassFighter
-				0, // ClassMagicUser
-				1, // ClassThief
-			},
+			name:             "Halfling",
+			availableClasses: ClassCleric | ClassFighter | ClassThief,
 			minAttributes: [6]uint{
 				3, 9, 3, 3, 3, 3, // Dex 9
 			},
@@ -52,13 +36,8 @@ func AllRaces() []*Race {
 			maxHitDieBase: 6,
 		},
 		&Race{
-			name: "Human",
-			availableClasses: [4]int{
-				1, // ClassCleric
-				1, // ClassFighter
-				1, // ClassMagicUser
-				1, // ClassThief
-			},
+			name:             "Human",
+			availableClasses: ClassCleric | ClassFighter | ClassMagicUser | ClassThief,
 			minAttributes: [6]uint{
 				3, 3, 3, 3, 3, 3, // None
 			},

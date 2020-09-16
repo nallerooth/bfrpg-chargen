@@ -1,10 +1,10 @@
 package bf
 
 const (
-	ClassFighter = iota
-	ClassCleric
-	ClassMagicUser
-	ClassThief
+	ClassFighter   = 1
+	ClassCleric    = 2
+	ClassMagicUser = 4
+	ClassThief     = 8
 )
 
 const (
@@ -40,7 +40,7 @@ type Class struct {
 
 type Race struct {
 	name             string
-	availableClasses [4]int
+	availableClasses int
 	minAttributes    [6]uint
 	maxAttributes    [6]uint
 	maxHitDieBase    uint
