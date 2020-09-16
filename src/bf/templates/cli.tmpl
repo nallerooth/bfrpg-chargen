@@ -1,0 +1,27 @@
+Name: {{.Name}}, Race: {{.Race}}, Class: {{.Class}} [{{.Level}}]
+==========================================================
+STR: {{.StrBase}} ({{.StrMod}})
+DEX: {{.DexBase}} ({{.DexMod}})
+CON: {{.ConBase}} ({{.ConMod}})
+INT: {{.IntBase}} ({{.IntMod}})
+WIS: {{.WisBase}} ({{.WisMod}})
+CHA: {{.ChaBase}} ({{.ChaMod}})
+
+{{ if not .Skills }}{{ else }}
+Open Locks:    {{.Skills.OpenLocks}}
+Remove Traps:  {{.Skills.RemoveTraps}}
+Pick Pockets:  {{.Skills.PickPockets}}
+Move Silently: {{.Skills.MoveSilently}}
+Climb Walls:   {{.Skills.ClimbWalls}}
+Hide:          {{.Skills.Hide}}
+Listen:        {{.Skills.Listen}}
+{{ end }}
+
+{{ if not .SpellSlots }}
+Character has no spells
+{{ else }}
+Spells
+==========================
+1    2    3    4    5    6
+{{ range .SpellSlots }}{{index .}}    {{ end }}
+{{  end }}
