@@ -51,11 +51,14 @@ type Race struct {
 }
 
 type Character struct {
-	name       [20]byte
-	class      *Class
-	race       *Race
-	attributes [6]attribute
-	level      uint
+	name        [20]byte
+	class       *Class
+	race        *Race
+	attributes  [6]attribute
+	level       uint
+	attackBonus uint
+	hitpoints   uint
+	armorClass  uint
 }
 
 type ThiefSkills struct {

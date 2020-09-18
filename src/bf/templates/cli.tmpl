@@ -1,11 +1,14 @@
 Name: {{.Name}}, Race: {{.Race}}, Class: {{.Class}} [{{.Level}}]
 ==========================================================
 STR: {{.StrBase}} ({{.StrMod}})        Saving Throws         {{if ne .Race "Human"}}[Racial bonus]{{end}}
-DEX: {{.DexBase}} ({{.DexMod}})        Death Ray/Poison:  {{index .Saves 0}} {{if ne (index .SavesMod 0) "+0"}}[{{index .SavesMod 0}}]{{end}}
+DEX: {{.DexBase}} ({{.DexMod}})        Death Ray/Poison:  {{index .Saves 1}} {{if ne (index .SavesMod 0) "+0"}}[{{index .SavesMod 0}}]{{end}}
 CON: {{.ConBase}} ({{.ConMod}})        Magic Wands:       {{index .Saves 1}} {{if ne (index .SavesMod 1) "+0"}}[{{index .SavesMod 1}}]{{end}}
 INT: {{.IntBase}} ({{.IntMod}})        Paralysis/Petrify: {{index .Saves 2}} {{if ne (index .SavesMod 2) "+0"}}[{{index .SavesMod 2}}]{{end}}
 WIS: {{.WisBase}} ({{.WisMod}})        Dragon Breath:     {{index .Saves 3}} {{if ne (index .SavesMod 3) "+0"}}[{{index .SavesMod 3}}]{{end}}
 CHA: {{.ChaBase}} ({{.ChaMod}})        Spells:            {{index .Saves 4}} {{if ne (index .SavesMod 4) "+0"}}[{{index .SavesMod 4}}]{{end}}
+
+Armor Class: {{.AC}}      Hitpoints: {{.HP}}      Base Attack Bonus: {{.AttackBonus}}
+
 {{ if not .Skills }}{{- else }}
 Open Locks:    {{.Skills.OpenLocks}}
 Remove Traps:  {{.Skills.RemoveTraps}}

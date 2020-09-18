@@ -11,26 +11,29 @@ var textTmpl = template.Must(template.ParseFiles("src/bf/templates/cli.tmpl"))
 
 func (c *Character) Text(out io.Writer) {
 	presentation := struct {
-		Name       string
-		Class      string
-		Level      uint
-		Race       string
-		StrBase    string
-		StrMod     string
-		DexBase    string
-		DexMod     string
-		ConBase    string
-		ConMod     string
-		IntBase    string
-		IntMod     string
-		WisBase    string
-		WisMod     string
-		ChaBase    string
-		ChaMod     string
-		Saves      *[5]uint
-		SavesMod   [5]string
-		Skills     *ThiefSkills
-		SpellSlots *spellSlots
+		Name        string
+		Class       string
+		Level       uint
+		Race        string
+		StrBase     string
+		StrMod      string
+		DexBase     string
+		DexMod      string
+		ConBase     string
+		ConMod      string
+		IntBase     string
+		IntMod      string
+		WisBase     string
+		WisMod      string
+		ChaBase     string
+		ChaMod      string
+		Saves       *[5]uint
+		SavesMod    [5]string
+		AttackBonus string
+		AC          uint
+		HP          uint
+		Skills      *ThiefSkills
+		SpellSlots  *spellSlots
 	}{
 		Name:    fmt.Sprintf("%s", c.name),
 		Class:   c.class.name,
@@ -56,8 +59,11 @@ func (c *Character) Text(out io.Writer) {
 			fmt.Sprintf("%+d", c.race.savesMod[3]),
 			fmt.Sprintf("%+d", c.race.savesMod[4]),
 		},
-		Skills:     nil,
-		SpellSlots: nil,
+		AttackBonus: fmt.Sprintf("%+d", c.attackBonus),
+		AC:          c.armorClass,
+		HP:          c.hitpoints,
+		Skills:      nil,
+		SpellSlots:  nil,
 	}
 
 	// Add thief skills if available
