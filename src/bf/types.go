@@ -56,7 +56,6 @@ type Character struct {
 	race       *Race
 	attributes [6]attribute
 	level      uint
-	Saves      [5]uint
 }
 
 type ThiefSkills struct {
