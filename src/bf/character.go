@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"time"
 
 	"../dice"
 )
+
+var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 // RollAttributes performes the standard 3D6 attribute rolls, for all attributes
 func (c *Character) RollAttributes(dice *dice.DiceRoller, method string) {
@@ -71,7 +74,7 @@ func (c *Character) SelectClass() error {
 	if len(availableClasses) == 0 {
 		return fmt.Errorf("Impossible character >> no classes available")
 	} else if len(availableClasses) > 1 {
-		c.class = availableClasses[rand.Intn(len(availableClasses))]
+		c.class = availableClasses[rng.Intn(len(availableClasses))]
 	} else {
 		c.class = availableClasses[0]
 	}
@@ -101,7 +104,7 @@ func (c *Character) SelectRace() {
 	if len(availableRaces) == 0 {
 		c.SelectRace()
 	} else if len(availableRaces) > 1 {
-		c.race = availableRaces[rand.Intn(len(availableRaces))]
+		c.race = availableRaces[rng.Intn(len(availableRaces))]
 	} else {
 		c.race = availableRaces[0]
 	}
