@@ -1,13 +1,12 @@
 Name: {{.Name}}, Race: {{.Race}}, Class: {{.Class}} [{{.Level}}]
 ==========================================================
-STR: {{.StrBase}} ({{.StrMod}})
-DEX: {{.DexBase}} ({{.DexMod}})
-CON: {{.ConBase}} ({{.ConMod}})
-INT: {{.IntBase}} ({{.IntMod}})
-WIS: {{.WisBase}} ({{.WisMod}})
-CHA: {{.ChaBase}} ({{.ChaMod}})
-
-{{ if not .Skills }}{{ else }}
+STR: {{.StrBase}} ({{.StrMod}})        Saving Throws         {{if ne .Race "Human"}}[Racial bonus]{{end}}
+DEX: {{.DexBase}} ({{.DexMod}})        Death Ray/Poison:  {{index .Saves 0}} {{if ne (index .SavesMod 0) "+0"}}[{{index .SavesMod 0}}]{{end}}
+CON: {{.ConBase}} ({{.ConMod}})        Magic Wands:       {{index .Saves 1}} {{if ne (index .SavesMod 1) "+0"}}[{{index .SavesMod 1}}]{{end}}
+INT: {{.IntBase}} ({{.IntMod}})        Paralysis/Petrify: {{index .Saves 2}} {{if ne (index .SavesMod 2) "+0"}}[{{index .SavesMod 2}}]{{end}}
+WIS: {{.WisBase}} ({{.WisMod}})        Dragon Breath:     {{index .Saves 3}} {{if ne (index .SavesMod 3) "+0"}}[{{index .SavesMod 3}}]{{end}}
+CHA: {{.ChaBase}} ({{.ChaMod}})        Spells:            {{index .Saves 4}} {{if ne (index .SavesMod 4) "+0"}}[{{index .SavesMod 4}}]{{end}}
+{{ if not .Skills }}{{- else }}
 Open Locks:    {{.Skills.OpenLocks}}
 Remove Traps:  {{.Skills.RemoveTraps}}
 Pick Pockets:  {{.Skills.PickPockets}}
@@ -15,11 +14,9 @@ Move Silently: {{.Skills.MoveSilently}}
 Climb Walls:   {{.Skills.ClimbWalls}}
 Hide:          {{.Skills.Hide}}
 Listen:        {{.Skills.Listen}}
-{{ end }}
+{{ end -}}
 
-{{ if not .SpellSlots }}
-Character has no spells
-{{ else }}
+{{- if not .SpellSlots }}{{- else }}
 Spells
 ==========================
 1    2    3    4    5    6

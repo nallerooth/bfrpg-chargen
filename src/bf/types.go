@@ -35,6 +35,7 @@ type Class struct {
 	primaryReqAttr   int
 	experienceLevels [20]int
 	numSpells        [20][6]int
+	saves            [20][5]uint
 	thiefSkills      [20]ThiefSkills
 }
 
@@ -44,6 +45,7 @@ type Race struct {
 	minAttributes    [6]uint
 	maxAttributes    [6]uint
 	maxHitDieBase    uint
+	savesMod         [5]uint
 	// TODO: Handle weapon sizes
 	specialAbilities []string // TODO: Add special abilities
 }

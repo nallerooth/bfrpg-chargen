@@ -7,9 +7,6 @@ import (
 	"text/template"
 )
 
-type saves struct {
-}
-
 var textTmpl = template.Must(template.ParseFiles("src/bf/templates/cli.tmpl"))
 
 func (c *Character) Text(out io.Writer) {
@@ -30,27 +27,35 @@ func (c *Character) Text(out io.Writer) {
 		WisMod     string
 		ChaBase    string
 		ChaMod     string
-		Saves      saves
+		Saves      *[5]uint
+		SavesMod   [5]string
 		Skills     *ThiefSkills
 		SpellSlots *spellSlots
 	}{
-		Name:       fmt.Sprintf("%s", c.name),
-		Class:      c.class.name,
-		Level:      c.level,
-		Race:       c.race.name,
-		StrBase:    fmt.Sprintf("%2d", c.attributes[AttrStr].value),
-		StrMod:     fmt.Sprintf("%+d", c.attributes[AttrStr].mod),
-		DexBase:    fmt.Sprintf("%2d", c.attributes[AttrDex].value),
-		DexMod:     fmt.Sprintf("%+d", c.attributes[AttrDex].mod),
-		ConBase:    fmt.Sprintf("%2d", c.attributes[AttrCon].value),
-		ConMod:     fmt.Sprintf("%+d", c.attributes[AttrCon].mod),
-		IntBase:    fmt.Sprintf("%2d", c.attributes[AttrInt].value),
-		IntMod:     fmt.Sprintf("%+d", c.attributes[AttrInt].mod),
-		WisBase:    fmt.Sprintf("%2d", c.attributes[AttrWis].value),
-		WisMod:     fmt.Sprintf("%+d", c.attributes[AttrWis].mod),
-		ChaBase:    fmt.Sprintf("%2d", c.attributes[AttrCha].value),
-		ChaMod:     fmt.Sprintf("%+d", c.attributes[AttrCha].mod),
-		Saves:      saves{},
+		Name:    fmt.Sprintf("%s", c.name),
+		Class:   c.class.name,
+		Level:   c.level,
+		Race:    c.race.name,
+		StrBase: fmt.Sprintf("%2d", c.attributes[AttrStr].value),
+		StrMod:  fmt.Sprintf("%+d", c.attributes[AttrStr].mod),
+		DexBase: fmt.Sprintf("%2d", c.attributes[AttrDex].value),
+		DexMod:  fmt.Sprintf("%+d", c.attributes[AttrDex].mod),
+		ConBase: fmt.Sprintf("%2d", c.attributes[AttrCon].value),
+		ConMod:  fmt.Sprintf("%+d", c.attributes[AttrCon].mod),
+		IntBase: fmt.Sprintf("%2d", c.attributes[AttrInt].value),
+		IntMod:  fmt.Sprintf("%+d", c.attributes[AttrInt].mod),
+		WisBase: fmt.Sprintf("%2d", c.attributes[AttrWis].value),
+		WisMod:  fmt.Sprintf("%+d", c.attributes[AttrWis].mod),
+		ChaBase: fmt.Sprintf("%2d", c.attributes[AttrCha].value),
+		ChaMod:  fmt.Sprintf("%+d", c.attributes[AttrCha].mod),
+		Saves:   &c.class.saves[c.level-1],
+		SavesMod: [5]string{
+			fmt.Sprintf("%+d", c.race.savesMod[0]),
+			fmt.Sprintf("%+d", c.race.savesMod[1]),
+			fmt.Sprintf("%+d", c.race.savesMod[2]),
+			fmt.Sprintf("%+d", c.race.savesMod[3]),
+			fmt.Sprintf("%+d", c.race.savesMod[4]),
+		},
 		Skills:     nil,
 		SpellSlots: nil,
 	}

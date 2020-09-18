@@ -12,6 +12,7 @@ func AllRaces() []*Race {
 				18, 18, 18, 18, 18, 17, // Cha 17
 			},
 			maxHitDieBase: 8,
+			savesMod:      [5]uint{4, 4, 4, 3, 4},
 		},
 		&Race{
 			name:             "Elf",
@@ -23,6 +24,7 @@ func AllRaces() []*Race {
 				18, 18, 17, 18, 18, 18, // Con 17
 			},
 			maxHitDieBase: 6,
+			savesMod:      [5]uint{0, 2, 1, 0, 2},
 		},
 		&Race{
 			name:             "Halfling",
@@ -34,6 +36,7 @@ func AllRaces() []*Race {
 				17, 18, 18, 18, 18, 18, // Str 17
 			},
 			maxHitDieBase: 6,
+			savesMod:      [5]uint{4, 4, 4, 3, 4},
 		},
 		&Race{
 			name:             "Human",
@@ -45,6 +48,7 @@ func AllRaces() []*Race {
 				18, 18, 18, 18, 18, 18, // None
 			},
 			maxHitDieBase: 8,
+			savesMod:      [5]uint{0, 0, 0, 0, 0},
 		},
 	}
 
