@@ -32,6 +32,9 @@ func (c *Character) Text(out io.Writer) {
 		AttackBonus string
 		AC          uint
 		HP          uint
+		OpenDoors   int
+		FindTraps   uint
+		SecretDoors uint
 		Skills      *ThiefSkills
 		SpellSlots  *spellSlots
 	}{
@@ -62,8 +65,26 @@ func (c *Character) Text(out io.Writer) {
 		AttackBonus: fmt.Sprintf("%+d", c.attackBonus),
 		AC:          c.armorClass,
 		HP:          c.hitpoints,
+		OpenDoors:   1 + c.attributes[AttrStr].mod,
+		FindTraps:   1,
+		SecretDoors: 1,
 		Skills:      nil,
 		SpellSlots:  nil,
+	}
+
+	if c.race.name == "Dwarf" {
+		presentation.FindTraps = 2
+	}
+
+	if c.race.name == "Elf" {
+		presentation.SecretDoors += 1
+	}
+	if c.attributes[AttrInt].value >= 15 {
+		presentation.SecretDoors += 1
+	}
+
+	if presentation.OpenDoors < 1 {
+		presentation.OpenDoors = 1
 	}
 
 	// Add thief skills if available

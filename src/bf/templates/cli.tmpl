@@ -7,7 +7,10 @@ INT: {{.IntBase}} ({{.IntMod}})        Paralysis/Petrify: {{index .Saves 2}} {{i
 WIS: {{.WisBase}} ({{.WisMod}})        Dragon Breath:     {{index .Saves 3}} {{if ne (index .SavesMod 3) "+0"}}[{{index .SavesMod 3}}]{{end}}
 CHA: {{.ChaBase}} ({{.ChaMod}})        Spells:            {{index .Saves 4}} {{if ne (index .SavesMod 4) "+0"}}[{{index .SavesMod 4}}]{{end}}
 
-Armor Class: {{.AC}}      Hitpoints: {{.HP}}      Base Attack Bonus: {{.AttackBonus}}
+Open Doors: {{.OpenDoors}}/6     Armor Class:        {{.AC}}
+Find traps: {{.FindTraps}}/6     Hitpoints:          {{.HP}}
+Search:     {{.SecretDoors}}/6     Base Attack Bonus: {{.AttackBonus}}
+Listen:     1/6     Initiative:        {{.DexMod}}
 
 {{ if not .Skills }}{{- else }}
 Open Locks:    {{.Skills.OpenLocks}}
