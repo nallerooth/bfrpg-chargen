@@ -82,6 +82,8 @@ func (c *Character) SelectClass() error {
 	return nil
 }
 
+// SelectRace filters the available races based on the character's attributes
+// and assigns a valid race at random
 func (c *Character) SelectRace() {
 	races := AllRaces()
 	availableRaces := make([]*Race, 0, len(races))

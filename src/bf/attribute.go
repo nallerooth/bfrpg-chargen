@@ -11,19 +11,20 @@ func calculateBonus(value uint) (bonus int, err error) {
 		return bonus, fmt.Errorf("Error setting attribute value of %d", value)
 	}
 
-	if value == 3 {
+	switch {
+	case value == 3:
 		bonus = -3
-	} else if isBetween(4, 5, value) {
+	case isBetween(4, 5, value):
 		bonus = -2
-	} else if isBetween(6, 8, value) {
+	case isBetween(6, 8, value):
 		bonus = -1
-	} else if isBetween(9, 12, value) {
+	case isBetween(9, 12, value):
 		bonus = 0
-	} else if isBetween(13, 15, value) {
+	case isBetween(13, 15, value):
 		bonus = 1
-	} else if isBetween(16, 17, value) {
+	case isBetween(16, 17, value):
 		bonus = 2
-	} else if value == 18 {
+	case value == 18:
 		bonus = 3
 	}
 

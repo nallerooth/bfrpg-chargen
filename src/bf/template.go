@@ -77,10 +77,10 @@ func (c *Character) Text(out io.Writer) {
 	}
 
 	if c.race.name == "Elf" {
-		presentation.SecretDoors += 1
+		presentation.SecretDoors++
 	}
 	if c.attributes[AttrInt].value >= 15 {
-		presentation.SecretDoors += 1
+		presentation.SecretDoors++
 	}
 
 	if presentation.OpenDoors < 1 {

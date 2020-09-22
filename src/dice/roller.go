@@ -58,7 +58,6 @@ func (d *DiceRoller) rollDie(sides int) uint {
 func parseDiceString(dicestr string) (*roll, error) {
 	var err error
 
-	//pattern := regexp.MustCompile(`^(\d+)d(\d+)([+-]?)(\d*)$`)
 	pattern := regexp.MustCompile(`^(\d+)d(\d+)(?:([+-]?)(\d*)?)(?:(d?)(\d)?)$`)
 	matches := pattern.FindStringSubmatch(dicestr)
 
@@ -99,9 +98,6 @@ func (d *DiceRoller) Roll(dicestr string) uint {
 	}
 
 	r.Execute(d.rng)
-
-	//fmt.Printf("%s >> amount: %d, sides: %d, modifier: %+d :: %v :: %d\n",
-	//dicestr, r.numDice, r.numSides, r.modifier, r.rolled, r.Sum())
 
 	return r.Sum()
 }
