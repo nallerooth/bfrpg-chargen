@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"./bf"
@@ -28,8 +27,6 @@ func main() {
 
 	}
 	character.SetLevel(8)
-	//character.Print()
 	character.Text(os.Stdout)
 
-	fmt.Println("")
 }
