@@ -4,12 +4,38 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"strconv"
 	"text/template"
 )
 
-var textTmpl = template.Must(template.ParseFiles("src/bf/templates/cli.tmpl"))
+var textTmpl *template.Template
+
+func initTextTemplate(funcs *template.FuncMap) {
+	if textTmpl == nil {
+		textTmpl = template.Must(template.New("cli.tmpl").Funcs(*funcs).ParseFiles("src/bf/templates/cli.tmpl"))
+	}
+
+}
 
 func (c *Character) Text(out io.Writer) {
+	funcs := template.FuncMap{
+		"add": func(strA, strB string) string {
+			var a, b int
+			var err error
+			if a, err = strconv.Atoi(strA); err != nil {
+				log.Fatalln("Error parsing string value to int:", strA)
+			}
+			if b, err = strconv.Atoi(strB); err != nil {
+				log.Fatalln("Error parsing string value to int:", strB)
+			}
+			return fmt.Sprintf("%d", a+b)
+		},
+		"addInt": func(a, b int) int {
+			return a + b
+		},
+	}
+	initTextTemplate(&funcs)
+
 	presentation := struct {
 		Name        string
 		Class       string

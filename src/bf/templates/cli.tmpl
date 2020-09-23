@@ -23,42 +23,15 @@ Listen:        {{.Skills.Listen}}
 {{ end -}}
 
 {{- if not .SpellSlots }}{{- else }}
-# Spells
+Memorized Spells
 ==========================
-{{- if gt (index .SpellSlots 0) 0}}
-Level 1          [{{index .SpellSlots 0}} slots]
-{{- range (index .Spells 0)}}
+{{- $spells := .Spells }}
+{{- range $i, $count := .SpellSlots }}
+{{- if gt $count 0}}
+Level {{addInt $i 1}}         [{{ $count }} slots]
+{{- range (index $spells $i)}}
   {{.}}
 {{- end}}
-{{end}}
-{{- if gt (index .SpellSlots 1) 0}}
-Level 2          [{{index .SpellSlots 1}} slots]
-{{- range (index .Spells 1)}}
-  {{.}}
-{{- end}}
-{{end}}
-{{- if gt (index .SpellSlots 2) 0}}
-Level 3          [{{index .SpellSlots 2}} slots]
-{{- range (index .Spells 2)}}
-  {{.}}
-{{- end}}
-{{end}}
-{{- if gt (index .SpellSlots 3) 0}}
-Level 4          [{{index .SpellSlots 3}} slots]
-{{- range (index .Spells 3)}}
-  {{.}}
-{{- end}}
-{{end}}
-{{- if gt (index .SpellSlots 4) 0}}
-Level 5          [{{index .SpellSlots 4}} slots]
-{{- range (index .Spells 4)}}
-  {{.}}
-{{- end}}
-{{end}}
-{{- if gt (index .SpellSlots 5) 0}}
-Level 6          [{{index .SpellSlots 5}} slots]
-{{- range (index .Spells 5)}}
-  {{.}}
 {{- end}}
 {{end}}
 {{end}}
