@@ -1,5 +1,7 @@
 package bf
 
+import "fmt"
+
 func AllClasses() []*Class {
 	return []*Class{
 		NewFighter(),
@@ -336,6 +338,177 @@ func (c *Class) spellSlotsForLevel(level uint) spellSlots {
 func (c *Class) ThiefSkillsForLevel(level uint) *ThiefSkills {
 	// TODO: Limit level range
 	return &c.thiefSkills[level-1]
+}
+
+// GetRandomSpellsOfLevel will return a slice of spell names for the given spell
+// level. Note that spellLevel is not zero-indexed, the first spell level is 1
+func (c *Class) GetRandomSpellsOfLevel(amount, spellLevel uint) ([]string, error) {
+	if !isBetween(1, 6, spellLevel) {
+		return nil, fmt.Errorf(
+			"Spell level must be between 1-6, %d given", spellLevel)
+	}
+
+	var selected []string
+	var availableSpells []string
+
+	clericSpells := [6][]string{
+		[]string{
+			"Cure Light Wounds*",
+			"Detect Evil*",
+			"Detect Magic",
+			"Light*",
+			"Protection from Evil*",
+			"Purify Food and Water",
+			"Remove Fear*",
+			"Resist Cold",
+		},
+		[]string{
+			"Bless*",
+			"Charm Animal",
+			"Find Traps",
+			"Hold Person",
+			"Resist Fire",
+			"Silence 15' radius",
+			"Speak with Animals",
+			"Spiritual Hammer",
+		},
+		[]string{
+			"Continual Light*",
+			"Cure Blindness",
+			"Cure Disease*",
+			"Growth of Animals",
+			"Locate Object",
+			"Remove Curse*",
+			"Speak with Dead",
+			"Striking",
+		},
+		[]string{
+			"Animate Dead",
+			"Create Water",
+			"Cure Serious Wounds*",
+			"Dispel Magic",
+			"Neutralize Poison*",
+			"Protection from Evil 10' radius*",
+			"Speak with Plants",
+			"Sticks to Snakes",
+		},
+		[]string{
+			"Commune",
+			"Create Food",
+			"Dispel Evil",
+			"Insect Plague",
+			"Quest*",
+			"Raise Dead*",
+			"True Seeing",
+			"Wall of Fire",
+		},
+		[]string{
+			"Animate Objects",
+			"Blade Barrier",
+			"Find the Path",
+			"Heal*",
+			"Regenerate",
+			"Restoration",
+			"Speak with Monsters",
+			"Word of Recall",
+		},
+	}
+
+	magicUserSpells := [6][]string{
+		[]string{
+			"Charm Person",
+			"Detect Magic",
+			"Floating Disc",
+			"Hold Portal",
+			"Light*",
+			"Magic Missile",
+			"Magic Mouth",
+			"Protection from Evil*",
+			"Read Languages",
+			"Shield",
+			"Sleep",
+			"Ventriloquism",
+		},
+		[]string{
+			"Continual Light*",
+			"Detect Evil*",
+			"Detect Invisible",
+			"ESP",
+			"Invisibility",
+			"Knock",
+			"Levitate",
+			"Locate Object",
+			"Mirror Image",
+			"Phantasmal Force",
+			"Web",
+			"Wizard Lock",
+		},
+		[]string{
+			"Clairvoyance",
+			"Darkvision",
+			"Dispel Magic",
+			"Fireball",
+			"Fly",
+			"Haste*",
+			"Hold Person",
+			"Invisibility 10‘ radius",
+			"Lightning Bolt",
+			"Protection from Evil 10’ radius*",
+			"Protection from Normal Missiles",
+			"Water Breathing",
+		},
+		[]string{
+			"Charm Monster",
+			"Confusion",
+			"Dimension Door",
+			"Growth of Plants*",
+			"Hallucinatory Terrain",
+			"Ice Storm",
+			"Massmorph",
+			"Polymorph Other",
+			"Polymorph Self",
+			"Remove Curse*",
+			"Wall of Fire",
+			"Wizard Eye",
+		},
+		[]string{
+			"Animate Dead",
+			"Cloudkill",
+			"Conjure Elemental",
+			"Feeblemind",
+			"Hold Monster",
+			"Magic Jar",
+			"Passwall",
+			"Telekinesis",
+			"Teleport",
+			"Wall of Stone",
+		},
+		[]string{
+			"Anti-Magic Shell",
+			"Death Spell",
+			"Disintegrate",
+			"Flesh to Stone*",
+			"Geas*",
+			"Invisible Stalker",
+			"Lower Water",
+			"Projected Image",
+			"Reincarnate",
+			"Wall of Iron",
+		},
+	}
+	switch c.id {
+	case ClassCleric:
+		availableSpells = clericSpells[spellLevel-1]
+	case ClassMagicUser:
+		availableSpells = magicUserSpells[spellLevel-1]
+	}
+
+	var i uint
+	for i = 0; i < amount; i++ {
+		selected = append(selected, availableSpells[rng.Intn(len(availableSpells))])
+	}
+
+	return selected, nil
 }
 
 func (c *Class) PrimaryAttribute() int {

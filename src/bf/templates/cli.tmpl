@@ -27,33 +27,38 @@ Listen:        {{.Skills.Listen}}
 ==========================
 {{- if gt (index .SpellSlots 0) 0}}
 Level 1          [{{index .SpellSlots 0}} slots]
-  - Cure Light Wounds
-  - Light
-  - Detect Magic
+{{- range (index .Spells 0)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{- if gt (index .SpellSlots 1) 0}}
 Level 2          [{{index .SpellSlots 1}} slots]
-  - Bless
-  - Hold Person
+{{- range (index .Spells 1)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{- if gt (index .SpellSlots 2) 0}}
 Level 3          [{{index .SpellSlots 2}} slots]
-  - Remove Curse
-  - Speak with Dead
+{{- range (index .Spells 2)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{- if gt (index .SpellSlots 3) 0}}
 Level 4          [{{index .SpellSlots 3}} slots]
-  - Animate Dead
-  - Neutralize Poison
+{{- range (index .Spells 3)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{- if gt (index .SpellSlots 4) 0}}
 Level 5          [{{index .SpellSlots 4}} slots]
-  - Create Food
-  - True Seeing
+{{- range (index .Spells 4)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{- if gt (index .SpellSlots 5) 0}}
 Level 6          [{{index .SpellSlots 5}} slots]
-  - Heal
-  - Restoration
+{{- range (index .Spells 5)}}
+  {{.}}
+{{- end}}
 {{end}}
 {{end}}

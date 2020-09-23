@@ -37,6 +37,7 @@ func (c *Character) Text(out io.Writer) {
 		SecretDoors uint
 		Skills      *ThiefSkills
 		SpellSlots  *spellSlots
+		Spells      [6]*[]string
 	}{
 		Name:    fmt.Sprintf("%s", c.name),
 		Class:   c.class.name,
@@ -98,6 +99,18 @@ func (c *Character) Text(out io.Writer) {
 	if c.class.id == ClassCleric || c.class.id == ClassMagicUser {
 		slots := c.class.spellSlotsForLevel(c.level)
 		presentation.SpellSlots = &slots
+
+		spells := [6]*[]string{}
+		for i, amount := range slots {
+			if amount > 0 {
+				lvlSpells, err := c.class.GetRandomSpellsOfLevel(uint(amount), uint(i+1))
+				if err != nil {
+					log.Fatalln(err)
+				}
+				spells[i] = &lvlSpells
+			}
+		}
+		presentation.Spells = spells
 	}
 
 	err := textTmpl.Execute(out, presentation)
