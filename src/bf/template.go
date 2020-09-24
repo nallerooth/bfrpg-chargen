@@ -89,7 +89,7 @@ func (c *Character) Text(out io.Writer) {
 			fmt.Sprintf("%+d", c.race.savesMod[3]),
 			fmt.Sprintf("%+d", c.race.savesMod[4]),
 		},
-		AttackBonus: fmt.Sprintf("%+d", c.attackBonus),
+		AttackBonus: fmt.Sprintf("%+d", c.class.attackBonus[c.level-1]),
 		AC:          c.armorClass,
 		HP:          c.hitpoints,
 		OpenDoors:   1 + c.attributes[AttrStr].mod,

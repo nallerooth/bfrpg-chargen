@@ -33,6 +33,7 @@ type Class struct {
 	hitDie           HitDie
 	reqAttributes    [6]uint
 	primaryReqAttr   int
+	attackBonus      [20]uint
 	experienceLevels [20]int
 	numSpells        [20][6]int
 	saves            [20][5]uint
@@ -51,14 +52,13 @@ type Race struct {
 }
 
 type Character struct {
-	name        [20]byte
-	class       *Class
-	race        *Race
-	attributes  [6]attribute
-	level       uint
-	attackBonus uint
-	hitpoints   uint
-	armorClass  uint
+	name       [20]byte
+	class      *Class
+	race       *Race
+	attributes [6]attribute
+	level      uint
+	hitpoints  uint
+	armorClass uint
 }
 
 type ThiefSkills struct {

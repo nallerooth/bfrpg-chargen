@@ -18,6 +18,16 @@ func NewCleric() *Class {
 	c.primaryReqAttr = AttrWis
 	c.hitDie = HitDie{6, 1}
 	c.reqAttributes[AttrWis] = 9
+	c.attackBonus = [20]uint{
+		1, 1, // 1-2
+		2, 2, // 3-4
+		3, 3, // 5-6
+		4, 4, // 7-8
+		5, 5, 5, // 9-11
+		6, 6, 6, // 12-14
+		7, 7, 7, // 15-17
+		8, 8, 8, // 18-20
+	}
 	c.experienceLevels = [20]int{
 		0,
 		1_500,
@@ -104,6 +114,18 @@ func NewFighter() *Class {
 	c.primaryReqAttr = AttrStr
 	c.hitDie = HitDie{8, 2}
 	c.reqAttributes[AttrStr] = 9
+	c.attackBonus = [20]uint{
+		1,    // 1
+		2, 2, // 2-3
+		3,    // 4
+		4, 4, // 5-6
+		5,       // 7
+		6, 6, 6, // 8-10
+		7, 7, // 11-12
+		8, 8, 8, // 13-15
+		9, 9, // 16-17
+		10, 10, 10, // 18-20
+	}
 	c.experienceLevels = [20]int{
 		0,
 		2_000,
@@ -165,6 +187,15 @@ func NewMagicUser() *Class {
 	c.primaryReqAttr = AttrInt
 	c.hitDie = HitDie{4, 1}
 	c.reqAttributes[AttrInt] = 9
+	c.attackBonus = [20]uint{
+		1, 1, 1, // 1-3
+		2, 2, // 4-5
+		3, 3, 3, // 6-8
+		4, 4, 4, 4, //9-12
+		5, 5, 5, // 13-15
+		6, 6, 6, // 16-18
+		7, 7, // 19-20
+	}
 	c.experienceLevels = [20]int{
 		0,
 		2_500,
@@ -251,6 +282,16 @@ func NewThief() *Class {
 	c.primaryReqAttr = AttrDex
 	c.hitDie = HitDie{4, 2}
 	c.reqAttributes[AttrDex] = 9
+	c.attackBonus = [20]uint{
+		1, 1, // 1-2
+		2, 2, // 3-4
+		3, 3, // 5-6
+		4, 4, // 7-8
+		5, 5, 5, // 9-11
+		6, 6, 6, // 12-14
+		7, 7, 7, // 15-17
+		8, 8, 8, // 18-20
+	}
 	c.experienceLevels = [20]int{
 		0,
 		1_250,
