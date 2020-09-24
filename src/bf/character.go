@@ -3,6 +3,7 @@ package bf
 import (
 	"fmt"
 	"log"
+	"math"
 	"math/rand"
 	"time"
 
@@ -110,4 +111,32 @@ func (c *Character) SelectRace() {
 	} else {
 		c.race = availableRaces[0]
 	}
+}
+
+func (c *Character) RollHealth(maxHealthFirstLevel bool) {
+	var hp uint
+	classHD := float64(c.class.hitDie.base)
+	raceHD := float64(c.race.maxHitDieBase)
+	hitDie := int(math.Min(classHD, raceHD))
+	conMod := c.attributes[AttrCon].mod
+
+	// Limit rolls to first 9 levels
+	numRolls := int(math.Min(float64(c.level), 9.0))
+
+	if maxHealthFirstLevel {
+		hp += uint(hitDie + conMod)
+		numRolls--
+	}
+
+	for i := 0; i < numRolls; i++ {
+		// (Rolled hit die plus con mod) OR 1
+		hp += uint(math.Max(float64(rng.Intn(hitDie)+1+conMod), 1.0))
+	}
+
+	if c.level > 9 {
+		multiplier := c.level - 9
+		hp += multiplier * c.class.hitDie.extraHP
+	}
+
+	c.hitpoints = hp
 }

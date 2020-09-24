@@ -26,7 +26,8 @@ func main() {
 		}
 
 	}
-	character.SetLevel(8)
+	character.SetLevel(3)
+	character.RollHealth(false) // Don't max health for lvl 1
 	character.Text(os.Stdout)
 
 }
