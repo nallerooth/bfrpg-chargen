@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"time"
 
-	"../dice"
+	"github.com/nallerooth/bfrpg-chargen/dice"
 )
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))

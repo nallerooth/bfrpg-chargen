@@ -12,7 +12,7 @@ var textTmpl *template.Template
 
 func initTextTemplate(funcs *template.FuncMap) {
 	if textTmpl == nil {
-		textTmpl = template.Must(template.New("cli.tmpl").Funcs(*funcs).ParseFiles("src/bf/templates/cli.tmpl"))
+		textTmpl = template.Must(template.New("cli.tmpl").Funcs(*funcs).ParseFiles("bf/templates/cli.tmpl"))
 	}
 
 }

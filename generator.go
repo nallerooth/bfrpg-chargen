@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"./bf"
-	"./dice"
+	"github.com/nallerooth/bfrpg-chargen/bf"
+	"github.com/nallerooth/bfrpg-chargen/dice"
 )
 
 func main() {
